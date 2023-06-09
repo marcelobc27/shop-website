@@ -1,3 +1,5 @@
+//Option 2: fetch products on the client side (in UseEffect)
+
 import Title from "@/components/Title";
 import Head from "next/head";
 

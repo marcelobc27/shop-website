@@ -1,12 +1,26 @@
+//Option 1: fetch products on the server side (in GetStaticProps)
+
 import Title from "@/components/Title";
+import { getProducts } from "@/lib/products";
 import Head from "next/head";
 
-const products = [
-  { id: 1, title: "First Product" },
-  { id: 2, title: "Second Product" },
-]
+interface ProductProps {
+  products: Product[]
+}
 
-const HomePage = () => {
+type Product = {
+  id: number;
+  title: string;
+}
+
+export async function getStaticProps(){
+  console.log('[Homepage], getStaticProps()')
+  const products = await getProducts()
+  return { props: { products }};
+}
+
+const HomePage = ({products} : ProductProps) => {
+  console.log(products)
   return (
     <>
       <Head>
