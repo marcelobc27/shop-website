@@ -1,14 +1,24 @@
 //Option 2: fetch products on the client side (in UseEffect)
 
 import Title from "@/components/Title";
+import { getProducts } from "@/lib/products";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
-const products = [
-  { id: 1, title: "First Product" },
-  { id: 2, title: "Second Product" },
-]
+type ProductProps = {
+  id: number;
+  title: string;
+}[]
 
 const HomePage = () => {
+  const [products, setProducts] = useState<ProductProps>()
+
+  useEffect(() => {
+    getProducts().then(setProducts)
+  }, [])
+
+  console.log(products)
+
   return (
     <>
       <Head>
@@ -19,7 +29,7 @@ const HomePage = () => {
         Next Shop
       </Title>
         <ul>
-          {products.map((product) => (
+          {products?.map((product) => (
             <li key={product.id}>
               {product.title}
             </li>
