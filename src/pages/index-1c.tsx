@@ -1,4 +1,4 @@
-//Option 1: fetch products on the server side (in getStaticProps)
+//Option 1: fetch products on the server side (in getServerSideProps)
 
 import Title from "@/components/Title";
 import { getProducts } from "@/lib/products";
@@ -13,8 +13,8 @@ type Product = {
   title: string;
 }
 
-export async function getStaticProps(){
-  console.log('[Homepage], getStaticProps()')
+export async function getServerSideProps(){
+  console.log('[Homepage], GetServerSideProps()')
   const products = await getProducts()
   return { props: { products }};
 }
