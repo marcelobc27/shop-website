@@ -1,6 +1,6 @@
 import { fetchjson } from "./api";
 
-const CMS_URL = "http://localhost:1337"
+const CMS_URL = process.env.CMS_URL
 export interface ProductProps {
   id: number;
   title: string;

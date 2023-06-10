@@ -23,7 +23,7 @@ export const getStaticProps : GetStaticProps = async () => {
   return{
     props: {
       products,
-      revalidate: 10
+      revalidate: parseInt(String(process.env.REVALIDATE_SECONDS))
     }
   }
 }

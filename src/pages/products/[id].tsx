@@ -21,7 +21,7 @@ export const getStaticProps : GetStaticProps = async (context) => {
     return{
       props: {
         ...product,
-        revalidate: 10
+        revalidate: parseInt(String(process.env.REVALIDATE_SECONDS))
       }
     }
   } catch(err) {
