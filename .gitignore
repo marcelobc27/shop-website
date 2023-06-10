@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# example folders
+/src/pages/examples
+/src/pages/api/examples
