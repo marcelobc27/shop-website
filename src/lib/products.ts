@@ -1,3 +1,6 @@
+import { fetchjson } from "./api";
+
+const CMS_URL = "http://localhost:1337"
 export interface ProductProps {
   id: number;
   title: string;
@@ -13,13 +16,11 @@ function stripProducts(product: ProductProps){
 }
 
 export async function getProduct(id: number | undefined){
-  const response = await fetch(`http://localhost:1337/products/${id}`)
-  const productResponse = await response.json()
-  return stripProducts(productResponse)
+  const product = await fetchjson(`${CMS_URL}/products/${id}`)
+  return stripProducts(product)
 }
 
 export async function getProducts(){
-  const response = await fetch('http://localhost:1337/products')
-  const products = await response.json()
+  const products = await fetchjson(`${CMS_URL}/products`)
   return products.map(stripProducts)
 }
