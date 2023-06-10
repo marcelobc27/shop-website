@@ -1,4 +1,5 @@
 import Title from "@/components/Title";
+import { ApiError } from "@/lib/api";
 import { ProductProps, getProduct, getProducts } from "@/lib/products";
 import { GetStaticPaths, GetStaticProps, NextPageContext } from "next";
 import Head from "next/head";
@@ -24,7 +25,10 @@ export const getStaticProps : GetStaticProps = async (context) => {
       }
     }
   } catch(err) {
-    return { notFound: true }
+    if(err instanceof ApiError && err.cause === 404){
+      return { notFound: true }
+    }
+    throw err
   }
 }
 
