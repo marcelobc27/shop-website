@@ -3,7 +3,9 @@
 
 import Title from "@/components/Title";
 import { getProducts } from "@/lib/products";
+import { GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 interface ProductProps {
   products: Product[]
@@ -14,17 +16,19 @@ type Product = {
   title: string;
 }
 
-export async function getStaticProps(){
+export const getStaticProps : GetStaticProps = async () => {
   console.log('[Homepage], getStaticProps()')
   const products = await getProducts()
-  return { 
-    props: { products },
-    revalidate: 5 * 60
-  };
+  
+  return{
+    props: {
+      products,
+      revalidate: 10
+    }
+  }
 }
 
-const HomePage = ({products} : ProductProps) => {
-  console.log(products)
+const HomePage = ({products}: ProductProps) => {
   return (
     <>
       <Head>
@@ -35,9 +39,11 @@ const HomePage = ({products} : ProductProps) => {
         Next Shop
       </Title>
         <ul>
-          {products.map((product) => (
+          {products?.map((product) => (
             <li key={product.id}>
-              {product.title}
+              <Link href={`/products/${product.id}`}>
+                {product.title}
+              </Link>
             </li>
           ))}
         </ul>
