@@ -17,7 +17,6 @@ type Products = {
 }
 
 export const getStaticProps : GetStaticProps = async () => {
-  console.log('[Homepage], getStaticProps()')
   const products = await getProducts()
   
   return{
@@ -29,7 +28,6 @@ export const getStaticProps : GetStaticProps = async () => {
 }
 
 const HomePage = ({products}: Products) => {
-  console.log("Chegou aqui", products)
   return (
     <>
       <Head>
@@ -39,7 +37,7 @@ const HomePage = ({products}: Products) => {
       <Title>
         Next Shop
       </Title>
-        <ul>
+        <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {products ? products.map((product: ProductProps) => (
             <li key={product.id}>
               <ProductCard {...product} />

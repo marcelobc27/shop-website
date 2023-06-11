@@ -5,7 +5,10 @@ export interface ProductProps {
   id: number;
   title: string;
   description: string;
-  price: number
+  price: number;
+  picture: {
+    url: string
+  };
 }
 
 function stripProducts(product: ProductProps){
@@ -13,7 +16,8 @@ function stripProducts(product: ProductProps){
     id: product.id,
     title: product.title,
     description: product.description,
-    price: '$' + product.price.toFixed(2)
+    price: '$' + product.price.toFixed(2),
+    picture: { url: CMS_URL + product.picture.url } 
   }
 }
 
