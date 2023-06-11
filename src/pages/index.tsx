@@ -1,19 +1,19 @@
 //fetch products on the server side 
 //with Incremental Static Regeneration (in GetStaticProps)
 
+import ProductCard from "@/components/ProductCard";
 import Title from "@/components/Title";
-import { getProducts } from "@/lib/products";
+import { ProductProps, getProducts } from "@/lib/products";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-interface ProductProps {
-  products: Product[]
-}
+// interface ProductProps {
+//   products: Product[]
+// }
 
-type Product = {
-  id: number;
-  title: string;
+type Products = {
+  products: ProductProps[]
 }
 
 export const getStaticProps : GetStaticProps = async () => {
@@ -28,7 +28,8 @@ export const getStaticProps : GetStaticProps = async () => {
   }
 }
 
-const HomePage = ({products}: ProductProps) => {
+const HomePage = ({products}: Products) => {
+  console.log("Chegou aqui", products)
   return (
     <>
       <Head>
@@ -39,13 +40,11 @@ const HomePage = ({products}: ProductProps) => {
         Next Shop
       </Title>
         <ul>
-          {products?.map((product) => (
+          {products ? products.map((product: ProductProps) => (
             <li key={product.id}>
-              <Link href={`/products/${product.id}`}>
-                {product.title}
-              </Link>
+              <ProductCard {...product} />
             </li>
-          ))}
+          )) : <h1>no products</h1>}
         </ul>
       </main>
     </>

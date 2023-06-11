@@ -5,13 +5,15 @@ export interface ProductProps {
   id: number;
   title: string;
   description: string;
+  price: number
 }
 
 function stripProducts(product: ProductProps){
   return {
     id: product.id,
     title: product.title,
-    description: product.description
+    description: product.description,
+    price: '$' + product.price.toFixed(2)
   }
 }
 
