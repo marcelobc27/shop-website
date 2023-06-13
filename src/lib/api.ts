@@ -9,8 +9,8 @@ export class ApiError extends Error {
   }
 }
 
-export async function fetchjson(url: string){
-  const response = await fetch(url)
+export async function fetchjson(url: string, options?: Object){
+  const response = await fetch(url, options)
   if(!response.ok){
     throw new ApiError(url, response.status)
   }
