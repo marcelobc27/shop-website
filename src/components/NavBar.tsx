@@ -1,31 +1,9 @@
-import { fetchjson } from "@/lib/api";
+import { useSignOut, useUser } from "@/hooks/user";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-interface User {
-  id: number;
-  name: string;
-}
 
 function NavBar() {
-  const [user, setUser] = useState<User>()
-  console.log(user)
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const user = await fetchjson('api/user')
-        setUser(user)  
-      } catch (err) {
-        
-      }
-    })()
-  }, [])
-
-  const handleSignOut = async () => {
-    await fetchjson('api/logout')
-    setUser(undefined)
-  }
+  const user = useUser()
+  const signOut = useSignOut()
 
   return (
     <nav className="px-2 py-1 text-sm">
@@ -40,7 +18,7 @@ function NavBar() {
             {user.name}
           </li>
           <li>
-            <button onClick={handleSignOut}>Sign Out</button>
+            <button onClick={signOut}>Sign Out</button>
           </li>
           </>
         ) : (

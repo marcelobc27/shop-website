@@ -1,4 +1,5 @@
 import Page from "@/components/Page";
+import { useUser } from "@/hooks/user";
 import { ApiError } from "@/lib/api";
 import { ProductProps, getProduct, getProducts } from "@/lib/products";
 import { GetStaticPaths, GetStaticProps, NextPageContext } from "next";
@@ -32,6 +33,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 function ProductPage(product: ProductProps) {
+  const user = useUser()
+  console.log("user in product page", user);
+
   return (
     <Page title={product.title}>
       <div className="flex flex-col lg:flex-row">
